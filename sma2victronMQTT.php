@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 //
 // This PHP scrips allows you to retrieve the current power and energy data of a SMA Tripower X inverter
@@ -11,11 +12,27 @@
 //
 //      - have a linux server with PHP, where this script can run on (e.g. es Raspberry Pi)
 //      - install Mosquitto-PHP (see https://github.com/mgdm/Mosquitto-PHP)
+//          On a vanilla RPI with RaspbianOS the following commands should do the needed Mosquitto-PHP installations:
+//              sudo -s
+//              apt -y install php php-dev libmosquitto-dev mosquitto mosquitto-dev mosquitto-clients git php-curl
+//              cd /tmp
+//              git clone https://github.com/mgdm/Mosquitto-PHP
+//              cd Mosquitto-PHP
+//              phpize
+//              ./configure --with-mosquitto=/usr/lib/arm-linux-gnueabihf/libmosquitto.so
+//              make
+//              make install
+//              echo 'extension=mosquitto.so' > /etc/php/7.4/cli/conf.d/20-mosquitto.ini
 //      - activate MQTT in you GX device (Settings->Services->MQTT on LAN (SSL & plaintext)
 //      - install the following driver:
 //          https://github.com/freakent/dbus-mqtt-devices
 //          installation instructions: https://github.com/freakent/dbus-mqtt-devices#Install-and-Setup
-//      - do the configuration below
+//      - configure the settings below in this script
+//      - put this script into the folder /usr/local/bin
+//      - make the script executable:
+//          chmod 755 /usr/local/bin/sma2victronMQTT.php
+//      - start the script with
+//          /usr/local/bin/sma2victronMQTT.php
 //
 
 //
